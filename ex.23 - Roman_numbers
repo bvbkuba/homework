@@ -1,0 +1,58 @@
+"""Ćwiczenie 23.
+Napisz program, który przeliczy wprowadzoną liczbę rzymską na jej postać dziesiętną."""
+
+slownik_liczb = {
+    "I": 1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100,
+    "D": 500,
+    "M": 1000
+}
+
+zbior_liczb = []
+suma_do_liczb = []
+zbiorI=[]
+def przelicz_liczby_rzymskie(liczba_rzymska):
+    lista_liczb_rzymskich = list(liczba_rzymska)
+    for znak in lista_liczb_rzymskich:
+        wartosci_liczbowe_liczb_rzymskich = slownik_liczb.setdefault(znak)
+        zbior_liczb.append(wartosci_liczbowe_liczb_rzymskich)
+    dlugosc_listy_do_range= len(zbior_liczb)-1
+    i = 0
+    zbior_i_z_iteracji=[]
+    if dlugosc_listy_do_range == 0:
+        suma_do_liczb.append(zbior_liczb[0])
+    elif dlugosc_listy_do_range == 1:
+        if zbior_liczb[0]<zbior_liczb[1]:
+            roznica = zbior_liczb[1]-zbior_liczb[0]
+            suma_do_liczb.append(roznica)
+        else:
+            suma_do_liczb.append(zbior_liczb[0])
+            suma_do_liczb.append(zbior_liczb[1])
+
+    else:
+
+        while i<dlugosc_listy_do_range:
+            cyfra_pierwsza = zbior_liczb[i]
+            cyfra_druga = zbior_liczb[i+1]
+            roznica = cyfra_druga-cyfra_pierwsza
+            if cyfra_pierwsza<cyfra_druga:
+                suma_do_liczb.append(roznica)
+                i = i+2
+                zbior_i_z_iteracji.append(i)
+            else:
+                suma_do_liczb.append(zbior_liczb[i])
+                i=i+1
+                zbior_i_z_iteracji.append(i)
+        roznica_I = zbior_i_z_iteracji[-1] - zbior_i_z_iteracji[-2]
+        ostatni = zbior_liczb[-1]
+        if roznica_I==1:
+          suma_do_liczb.append(ostatni)
+    return sum(suma_do_liczb)
+
+
+if __name__ == "__main__":
+    wprowadz_dane = input("Wprowadź dane: ")
+    print(przelicz_liczby_rzymskie(wprowadz_dane))
