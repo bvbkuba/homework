@@ -3,6 +3,43 @@ argument and returns its compressed version A4a2B1C3D2e1
 """
 
 
+
+"""6. # Write function which takes string AAAAaaBCC CDDe as
+argument and returns its compressed version A4a2B1C3D2e1
+"""
+def foo_list(start_word):
+
+
+    # tablica z zachowaniem jednego elementu
+    #  list_element = [A,B,D,Z,X,c,2,5,p,P]
+    #list_element_count = [1,3,2,5,2,3,1,2,7,9]
+    list_element = []
+    list_element_count = []
+    for char in start_word:
+        if char in list_element:
+            index = list_element.index(char)
+            list_element_count[index] +=1
+            
+        else:
+            list_element.append(char)
+            list_element_count.append(1)
+    word_len = len(list_element)
+    result_word = ""
+    for index in range(word_len):
+        result_word += list_element[index]
+        result_word += str(list_element_count[index])
+        #result_word = f"{result_word}{list_element[index]}{list_element_count[index]}"
+    return result_word
+
+if __name__=="__main__":
+    result = foo_list("ASCCCCCCCCDDDSSEeeeD")
+    print(result)
+
+
+
+
+"""poprzednia - gorsza
+
 def licz_wyrazy(tekst):
 
     licznik = {}
