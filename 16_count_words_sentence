@@ -1,0 +1,29 @@
+"""Ćwiczenie 16.
+Napisz program "wyrazy.py", który wczyta od użytkownika pewien tekst, a następnie podzieli go na zdania
+ (zakładamy, że jednoznacznie kropka rozdziela zdania) i dla każdego zdania wyświetli ile jest w nim wyrazów
+ (zakładamy, że spacja oddziela wyrazy w zdaniu).
+"""
+
+def oblicz_zdania():
+    znaki_specjalne = [".", "?", "!"]
+    tekst = input("Wprowadź tekst: ")
+    slowa = tekst.split()  #podziel tekst na slowa
+    licznik_zdan = 0   # start licznika zdań
+    ilosc_slow = 0      # ilosc slow dla zdania
+    lista_slow = []     #wpisywanie ilości słów jako lista do późniejszego złączenia z listą zdań
+    lista_zdan = []    # zapisywanie ilości zdań jako lista
+
+    for i in slowa:  #dla każdego slowa w zdaniu
+        if i[-1] in znaki_specjalne:  #jesli ostatnia litera to .,?
+            ilosc_slow+=1               #zwiększ ilosc slow, bo znak specjalny jest przy slowie
+            lista_slow.append(ilosc_slow) #dodaj ilosc slow w zdaniu do listy_slow
+            lista_zdan.append(licznik_zdan) #dodaj ilosc zdan do listy zdan
+            ilosc_slow = 0                  # wyzeruj liste slow dla nowego zdania
+            licznik_zdan = licznik_zdan + 1 # zwieksz ilosc zdan o jeden
+        else:
+            ilosc_slow = ilosc_slow+1   # w kazdej innej sytuacji dodaj ilosc slow
+
+    for i in lista_zdan:    #iteruj liste_zdan
+        print("Lista zdań w zdaniu", i+1, "wynosi: ", lista_slow[i])    #zlaczenie list, i+1 bo zdanie zerowe nie ma sensu.
+
+print(oblicz_zdania())
