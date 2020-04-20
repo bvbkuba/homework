@@ -1,0 +1,26 @@
+"""6. # Write function which takes string AAAAaaBCC CDDe as
+argument and returns its compressed version A4a2B1C3D2e1
+"""
+
+
+def licz_wyrazy(tekst):
+
+    licznik = {}
+    nazwa =""
+
+    licznik["A"] = 0
+    licznik["a"] = 0
+    licznik["B"] = 0
+    licznik["C"] = 0
+    licznik["D"] = 0
+    licznik["e"] = 0
+
+    for i in tekst:
+        if i not in licznik:
+            continue
+        licznik[i] +=1
+    for y in licznik:
+        nazwa= nazwa + str(y)+str(licznik[y])
+    return nazwa
+
+print(licz_wyrazy("AAAAaaBCC CDDe"))
