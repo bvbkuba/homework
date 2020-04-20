@@ -1,0 +1,32 @@
+"""Ćwiczenie 19.
+Zdefiniuj funkcję "sylaby", która dla parametru będącego wyrazem w języku polskim, zwróci listę jego sylab.
+Funkcja nie musi działać perfekcyjnie
+dla każdego wyrazu (wyjątków itp.), ale im więcej przypadków obsłuży prawidłowo, tym lepiej."""
+
+
+def sylaby():
+    tekst = input("Wprowadź tekst: ")
+    samogloski = ["a","e","i","o","u","y","ę","ą"]
+    slowa_w_tekscie = tekst.split()
+    sylaby = 0
+    for slowo in slowa_w_tekscie:
+        if len(slowo) <= 3:
+            sylaby = sylaby+1
+        else:
+            zbior=[]
+            for litera in slowo:
+                if litera in samogloski:
+                    if len(zbior)==0:
+                        sylaby +=1
+                        zbior.append(litera)
+                    else:
+                        if zbior[-1] in samogloski:
+                            zbior.append(litera)
+                        else:
+                            sylaby +=1
+                            zbior.append(litera)
+                else:
+                    zbior.append(litera)
+
+    return sylaby
+print(sylaby())
