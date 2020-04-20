@@ -1,0 +1,32 @@
+"""5. Napisz funkcję leap_years, która przyjmuje parametr n i wyświetli n najbliższych lat przestępnych. Zdefiniuj w tym celu funkcję is_leap,
+ która zwróci wartość True gdy rok jest przestępny (podzielny przez 4 i niepodzielny przez 100,
+ lub podzielny przez 400: https://pl.wikipedia.org/wiki/Rok_przest%C4%99pny),
+ a następnie wykorzystaj pętlę while."""
+
+
+def is_leap(n):
+    if (n%4 == 0 and not n%100 == 0) or n%400==0:
+        rok_przestepny = True
+    else:
+        rok_przestepny = False
+    return rok_przestepny
+#mogłoby być tylko return n%4 == 0 and not n%100 == 0) or n%400==0
+# wtedy ma domyślnie True przy prawdzie, false przy złym rozpisaniu
+def leap_years(n):
+    licznik = 0
+    i = 2020
+
+    while n>i:
+        if is_leap(n):
+            print(n)
+            licznik += 1
+            n-=1
+
+        else:
+            licznik
+            n-=1
+    return licznik
+
+if __name__ == "__main__":
+    rok = int(input("Podaj rok: "))
+    print(f"Będzie: {leap_years(rok)} lat przestępnych")
