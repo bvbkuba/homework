@@ -1,0 +1,5 @@
+old_list = [1,2,3,4,5,6,7]
+new_list = [x**2 for x in old_list if not x%2]
+print(new_list)
+
+print(bool(0))
