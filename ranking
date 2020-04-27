@@ -1,0 +1,126 @@
+""woim zadaniem domowym jest napisanie prostej gry, która ma działać następująco:
+1. Program losuje liczbę z przedziału od 1 do 1000.
+2. Użytkownik zgaduje liczbę, która została wylosowana.
+3. Jeżeli podana liczba jest za duża (za mała) gra wypisuje stosowny komunikat i powraca do kroku 2.
+4. Jeżeli gracz trafi liczbę wylosowaną to progam kończy działanie, wypisując na ekran wylosowaną liczbę oraz liczbę 'strzałów', które oddał gracz.
+Gra ma być zabezpieczona przed możliwością wprowadzenia błędnych wartości liczbowych"""
+from PYTHON_SDA_KURS.Python_SDA_dzien4.zadania.grazankingiem.pliki_do_gry import *
+
+licznik = 1
+import random
+def poziom():
+    poziom_trudnosci = ["easy", "medium", "difficult"]
+    print("Wybierz poziom trudności: ")
+    for i in range(len(poziom_trudnosci)):
+        print(f"{poziom_trudnosci[i]}[{str(i+1)}]")
+    question = int(input("Wprowadź poziom: "))
+    if question == 1:
+        print(f"Witaj na poziomie {poziom_trudnosci[question-1]}!")
+        return 10   # zwróć do randintu cyfre
+    elif question == 2:
+        print(f"Witaj na poziomie {poziom_trudnosci[question-1]}!")
+        return 100
+    elif question == 3:
+        print(f"Witaj na poziomie {poziom_trudnosci[question-1]}!")
+        return 1000
+    else:
+        pass
+
+
+def strzelaj():
+    global licznik
+    menu = ["graj", "pokaz ranking", "wyjdz"]
+
+    for i in range(len(menu)):
+        print(f"{menu[i]}[{i+1}]")  #numeruj od 1-3
+    question = int(input("Grasz, porównujesz się czy się boisz?"))
+    if question ==1:
+        wybor = int(input("Wprowadź liczbę: "))
+        if wybor==los:
+            print(f"Trafiłeś za {licznik} razem, brawo!")
+            if poziom_choice == 10:
+                zapisuj_wyniki_ranking_1_10(imie,str(licznik))
+                licznik = 1
+            elif poziom_choice==100:
+                zapisuj_wyniki_ranking_1_100(imie,str(licznik))
+                licznik = 1
+            elif poziom_choice==1000:
+                zapisuj_wyniki_ranking_1_1000(imie,str(licznik))
+                licznik = 1
+
+        elif wybor>los:
+            print(f"Pomyliłeś się, trochę za dużo, dokładnie o {wybor-los}")
+            licznik = licznik+1
+            strzelaj()
+        else:
+            print(f"Pomyliłeś się, trochę za mało, dokładnie o {los-wybor}")
+            licznik+=1
+            strzelaj()
+    elif question ==2:
+        if poziom_choice == 10:    #poziom choice oznacza return z funkcji poziom
+            odczyt_rankingu_top_10()
+        elif poziom_choice == 100:
+            odczyt_rankingu_top_100()
+        elif poziom_choice==1000:
+            odczyt_rankingu_top_1000()
+    else:
+        licznik = 1
+        pass
+
+
+if __name__ == "__main__":
+    poziom_choice = poziom()
+    los = random.randint(1,poziom_choice)
+    imie = input("Wprowadz imie: ")
+    strzelaj()
+
+
+
+
+
+
+
+
+rankingi i funkcje import:
+
+
+
+
+def odczyt_rankingu_top_10():
+    text = open("wyniki_do_10.txt","r", encoding="utf-8")
+    lines = text.readlines()
+    lines = [line.split(",") for line in lines]
+    # konwersja do typu int i utworzenie obiektu tuple
+    lines = [(item[0], int(item[1])) for item in lines]
+    print(lines)
+    print(sorted(lines, key=lambda x: x[1]))
+
+def odczyt_rankingu_top_100():
+    text = open("wyniki_do_100.txt","r", encoding="utf-8")
+    lines = text.readlines()
+    lines = [line.split(",") for line in lines]
+    # konwersja do typu int i utworzenie obiektu tuple
+    lines = [(item[0], int(item[1])) for item in lines]
+    print(lines)
+    print(sorted(lines, key=lambda x: x[1]))
+
+def odczyt_rankingu_top_1000():
+    text = open("wyniki_do_1000.txt","r", encoding="utf-8")
+    lines = text.readlines()
+    lines = [line.split(",") for line in lines]
+    # konwersja do typu int i utworzenie obiektu tuple
+    lines = [(item[0], int(item[1])) for item in lines]
+    print(lines)
+    print(sorted(lines, key=lambda x: x[1]))
+
+def zapisuj_wyniki_ranking_1_10(login,wynik):
+    with open("wyniki_do_10.txt","a",encoding="utf-8") as top10:
+        top10.write(f"{login}, {wynik}\n")
+
+def zapisuj_wyniki_ranking_1_100(login,wynik):
+    with open("wyniki_do_100.txt","a",encoding="utf-8") as top100:
+        top100.write(f"{login}, {wynik}\n")
+
+def zapisuj_wyniki_ranking_1_1000(login,wynik):
+    with open("wyniki_do_1000.txt","a",encoding="utf-8") as top1000:
+        top1000.write(f"{login}, {wynik}\n")
