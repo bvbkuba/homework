@@ -1,2 +1,2 @@
-# homework
+# Zadania_domowe
 Homework$course
